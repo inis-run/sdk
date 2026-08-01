@@ -1,0 +1,62 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "langchain-inis"
+version = "0.1.0"
+description = "inis.run sandbox backend for LangChain Deep Agents, plus a LangGraph recipe"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "inis.run" }]
+dependencies = [
+  "inis>=0.1.0,<1",
+  # deepagents.backends.protocol.SandboxBackendProtocol / .sandbox.BaseSandbox
+  # is a public, documented third-party extension point (see backend.py's
+  # module docstring for how that was verified against installed source +
+  # live docs), but deepagents ships fast 0.x releases — pin the verified
+  # minor and re-check before widening, same policy inis-openai-agents uses
+  # for its own beta upstream pin.
+  "deepagents>=0.7.0,<0.8",
+]
+keywords = ["inis", "sandbox", "langchain", "langgraph", "deepagents", "deep-agents", "llm", "agents"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Software Development :: Libraries",
+]
+
+# `langchain`/`langgraph` (the LangGraph-recipe path, examples/ + tests/
+# only — never imported by langchain_inis/backend.py) are dev/test
+# dependencies of this adapter, never runtime deps of the core `inis`
+# SDK. `langchain-tests` provides the standard
+# `SandboxIntegrationTests` conformance suite this package's own tests
+# subclass (see backend.py's module docstring, point 1).
+[project.optional-dependencies]
+dev = [
+  "langchain>=1.3,<2",
+  "langchain-core>=1.5,<2",
+  "langgraph>=1.2,<2",
+  "langchain-tests>=1.1,<2",
+  "pytest>=8",
+  "pytest-asyncio>=0.24",
+]
+
+[project.urls]
+Homepage = "https://inis.run"
+Repository = "https://github.com/inis-run/sdk/tree/main/langchain-inis"
+Issues = "https://github.com/inis-run/sdk/issues"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["langchain_inis*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"

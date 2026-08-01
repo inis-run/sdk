@@ -1,0 +1,50 @@
+{
+  "name": "@inis-run/openai-agents",
+  "version": "0.1.0",
+  "description": "inis.run sandbox provider for the OpenAI Agents SDK (beta)",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run",
+    "prepublishOnly": "npm run build"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/inis-run/sdk.git",
+    "directory": "openai-agents-js"
+  },
+  "homepage": "https://inis.run",
+  "bugs": {
+    "url": "https://github.com/inis-run/sdk/issues"
+  },
+  "keywords": ["inis", "sandbox", "agents", "llm", "openai-agents"],
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "@openai/agents-core": "^0.14.0",
+    "@inis-run/sdk": "^0.1.0"
+  },
+  "devDependencies": {
+    "@openai/agents": "0.14.1",
+    "@openai/agents-core": "0.14.1",
+    "@types/node": "^22.19.11",
+    "@inis-run/sdk": "file:../typescript",
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.10",
+    "zod": "^4.0.0"
+  }
+}
