@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "inis"
+version = "0.1.0"
+description = "Python SDK for inis.run agent sandboxes"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "inis.run", email = "ops@inis.run" }]
+keywords = ["inis", "sandbox", "agents", "llm"]
+dependencies = ["httpx>=0.27", "websockets>=13"]
+
+[project.urls]
+Homepage = "https://inis.run"
+Documentation = "https://docs.inis.run"
+Repository = "https://github.com/inis-run/sdk/tree/main/python"
+Issues = "https://github.com/inis-run/sdk/issues"
+
+[project.optional-dependencies]
+# pyyaml is test-only (test_openapi_sync.py parses api/openapi.yaml to catch
+# response fields the hand-written client forgot to map) — never shipped as
+# a runtime dependency of the installed package.
+dev = ["pytest>=8", "pytest-asyncio>=0.24", "pyyaml>=6"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["inis*"]
+
+[tool.pytest.ini_options]
+# Put the sdk/python root on sys.path so `from tests.conftest import ...`
+# resolves when pytest runs from here in CI (tests is an implicit namespace
+# package; without this it fails with ModuleNotFoundError: No module named
+# 'tests').
+pythonpath = ["."]
+testpaths = ["tests"]
+# asyncio_mode=auto: async def test_* functions run as coroutines without
+# needing an explicit @pytest.mark.asyncio on every one (tests/test_async_*.py).
+asyncio_mode = "auto"
