@@ -1,0 +1,58 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "inis-agent-framework"
+version = "0.1.0"
+description = "inis.run CodeAct provider for Microsoft Agent Framework"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "inis.run" }]
+dependencies = [
+  "inis>=0.1.0,<1",
+  # agent_framework.ContextProvider / FunctionTool / Content / Agent /
+  # AgentSession are stable, public, "5 - Production/Stable" APIs shipped
+  # in the base agent-framework-core package (no extras needed -- verified
+  # they import with nothing else installed). This package mirrors the
+  # *shape* of agent-framework-monty's MontyCodeActProvider /
+  # MontyExecuteCodeTool and agent-framework-hyperlight's
+  # HyperlightCodeActProvider (both classified "4 - Beta" and explicitly
+  # documented as such upstream) but does not depend on either package --
+  # inis.run's own persistent session (via inis.AsyncSession.run_code())
+  # is the execution backend, not Monty's in-process interpreter or
+  # Hyperlight's hypervisor. Verified against agent-framework-core==1.13.0;
+  # pin the major and re-check before widening -- the CodeAct
+  # provider/tool convention this mirrors is young (Monty/Hyperlight only
+  # shipped as "beta" packages) and could still change shape upstream.
+  "agent-framework-core>=1.13,<2",
+]
+keywords = ["inis", "sandbox", "agent-framework", "microsoft", "codeact", "llm", "agents"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Software Development :: Libraries",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "pytest-asyncio>=0.24"]
+
+[project.urls]
+Homepage = "https://inis.run"
+Repository = "https://github.com/inis-run/sdk/tree/main/agent-framework"
+Issues = "https://github.com/inis-run/sdk/issues"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["inis_agent_framework*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
