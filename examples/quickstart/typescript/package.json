@@ -1,0 +1,18 @@
+{
+  "name": "inis-quickstart",
+  "private": true,
+  "type": "module",
+  "description": "Canonical inis.run TypeScript quickstart — run with tsx or compile with tsc.",
+  "scripts": {
+    "start": "tsx quickstart.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@inis-run/sdk": "^0.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.19.11",
+    "tsx": "^4.19.0",
+    "typescript": "^5.9.3"
+  }
+}

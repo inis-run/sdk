@@ -1,0 +1,54 @@
+{
+  "name": "@inis-run/sdk",
+  "version": "0.1.0",
+  "description": "TypeScript SDK for inis.run agent sandboxes",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run",
+    "prepublishOnly": "npm run build"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/inis-run/sdk.git",
+    "directory": "typescript"
+  },
+  "homepage": "https://inis.run",
+  "bugs": {
+    "url": "https://github.com/inis-run/sdk/issues"
+  },
+  "keywords": [
+    "inis",
+    "sandbox",
+    "agents",
+    "llm"
+  ],
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "ws": "^8.18.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.19.11",
+    "@types/ws": "^8.18.1",
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.10",
+    "yaml": "^2.9.0"
+  }
+}
