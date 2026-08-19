@@ -1,0 +1,24 @@
+{
+  "name": "inis-agent-harness-examples",
+  "private": true,
+  "type": "module",
+  "description": "inis.run agent-harness examples: persistent tool loop, branch/evaluate, pause/resume across turns, concurrent conversations, error recovery.",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "persistent-tool-loop": "tsx persistent-tool-loop.ts",
+    "branch-and-evaluate": "tsx branch-and-evaluate.ts",
+    "pause-resume-across-turns": "tsx pause-resume-across-turns.ts",
+    "concurrent-conversations": "tsx concurrent-conversations.ts",
+    "error-recovery-and-limits": "tsx error-recovery-and-limits.ts"
+  },
+  "dependencies": {
+    "@inis-run/sdk": "^0.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.19.11",
+    "tsx": "^4.19.0",
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.10"
+  }
+}

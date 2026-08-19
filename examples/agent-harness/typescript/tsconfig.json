@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022", "ESNext.Disposable"],
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "strict": true,
+    "skipLibCheck": true,
+    "noEmit": true
+  },
+  "include": [
+    "persistent-tool-loop.ts",
+    "branch-and-evaluate.ts",
+    "pause-resume-across-turns.ts",
+    "concurrent-conversations.ts",
+    "error-recovery-and-limits.ts",
+    "tests/**/*.ts"
+  ]
+}
