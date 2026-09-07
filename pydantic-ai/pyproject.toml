@@ -1,0 +1,49 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "inis-pydantic-ai"
+version = "0.1.0"
+description = "Pydantic AI toolset for inis.run sandboxes"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "inis.run" }]
+dependencies = [
+  "inis>=0.1.0,<1",
+  # >=1.71: first release with pydantic_ai.capabilities (used by
+  # InisSandbox, see sandbox.py) and FunctionToolset.tool_plain (used for
+  # our context-free tools, see toolset.py). <3: pydantic-ai 2.0 silently
+  # made @toolset.tool require a RunContext[...] first param; pin below
+  # the next major to avoid repeating that break without notice.
+  "pydantic-ai>=1.71,<3",
+]
+keywords = ["inis", "sandbox", "agents", "llm", "pydantic-ai"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Software Development :: Libraries",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "pytest-asyncio>=0.24"]
+
+[project.urls]
+Homepage = "https://inis.run"
+Repository = "https://github.com/inis-run/sdk/tree/main/pydantic-ai"
+Issues = "https://github.com/inis-run/sdk/issues"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["inis_pydantic_ai*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
