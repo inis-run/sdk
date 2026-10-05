@@ -1,0 +1,58 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "inis-google-adk"
+version = "0.2.0"
+description = "inis.run BaseEnvironment provider for Google Agent Development Kit (ADK)"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "inis.run" }]
+dependencies = [
+  "inis>=0.1.0,<1",
+  # google.adk.environment.BaseEnvironment / google.adk.tools.environment.
+  # EnvironmentToolset are real, public, importable classes -- verified in
+  # installed source, not docs -- but both are decorated `@experimental`
+  # in ADK's own source, and neither is re-exported from the `google.adk`
+  # top-level package (import from the submodules directly, same as this
+  # package does). The two in-tree reference providers Google itself ships
+  # against this contract (E2BEnvironment, DaytonaEnvironment, under
+  # google.adk.integrations.*) are also both `@experimental`. Verified
+  # against google-adk==2.6.0; the public class names/import paths have
+  # been stable back to at least 2.0.0, but the internal toolset
+  # composition churned between 2.0.0 (one _tools.py) and 2.5.0+ (split
+  # Execute/ReadFile/EditFile/WriteFile tool classes) -- pin and re-check
+  # before assuming forward compatibility of anything not covered by this
+  # package's own tests.
+  "google-adk>=2.6.0,<3",
+]
+keywords = ["inis", "sandbox", "google-adk", "adk", "environment", "llm", "agents"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Software Development :: Libraries",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "pytest-asyncio>=0.24"]
+
+[project.urls]
+Homepage = "https://inis.run"
+Repository = "https://github.com/inis-run/sdk/tree/main/google-adk"
+Issues = "https://github.com/inis-run/sdk/issues"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["inis_google_adk*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
